@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
 const Users = require('./models/vendor')
+const compression = require('compression');
+const helmet = require('helmet');
 
 require('dotenv').config()
 
@@ -14,9 +16,12 @@ var itemsRouter = require('./routes/itemsRouter');
 
 var app = express();
 
+app.use(compression());
+
+app.use(helmet());
 
 // Set up default mongoose connection
-const mongoDB = process.env.DBURL;
+const mongoDB = process.env.ATLASDB;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection

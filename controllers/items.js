@@ -25,6 +25,15 @@ const createItems = async (req, res) => {
         res.status(500).json({msg: error})
     }
 }
+// const deleteItems = async (req, res) => {
+//     try {
+//         const id = req.params.id;
+//         const users = await Users.findByIdAndRemove({_id: id})
+//     }
+//     catch(error) {
+//         res.status(500).json({msg: error});
+//     }
+// }
 
 const getVendors = async (req, res) => {
     try {
@@ -40,4 +49,4 @@ module.exports = {
     getItems,
     createItems,
     getVendors
-}
+};
