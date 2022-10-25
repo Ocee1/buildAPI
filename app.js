@@ -21,7 +21,7 @@ app.use(compression());
 app.use(helmet());
 
 // Set up default mongoose connection
-const mongoDB = process.env.ATLASDB;
+const mongoDB = process.env.DBURL;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Get the default connection
