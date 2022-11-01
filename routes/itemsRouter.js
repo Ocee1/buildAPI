@@ -1,18 +1,22 @@
 const express = require('express');
-const { getItems, createItems, getVendors, deleteItems } = require('../controllers/items');
+const { createvendor, createitems, getAllItems, getVendorItems} = require('../controllers/items');
 const bodyParser = require('body-parser');
 
 // const Item = require('./controllers/User')
 
 var itemRouter = express.Router();
 
-itemRouter.route('/')
-.get(getVendors)
-.post(createItems)
+itemRouter.route('/create-vendor')
+.post(createvendor);
+itemRouter.route('/create-table')
+.post(createitems);
 
 
-itemRouter.route('/:id/items')
-.get(getItems)
+itemRouter.route('/allItems')
+.get(getAllItems);
+
+itemRouter.route('/vendor')
+.get(getVendorItems);
 // .delete(deleteItems)
 
 

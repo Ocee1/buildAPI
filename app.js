@@ -3,32 +3,24 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require("mongoose");
-const Users = require('./models/vendor')
 const compression = require('compression');
 const helmet = require('helmet');
+const mysql = require('mysql2');
+
+const DB = require('./models/config');
 
 require('dotenv').config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var itemsRouter = require('./routes/itemsRouter');
+var dbrouter = require('./routes/dbrouter');
 
 var app = express();
 
 app.use(compression());
 
 app.use(helmet());
-
-// Set up default mongoose connection
-const mongoDB = process.env.DBURL;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-
-// Get the default connection
-const db = mongoose.connection;
-
-// Bind connection to error event (to get notification of connection errors)
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 
 // view engine setup
@@ -41,9 +33,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use('/db', dbrouter);
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
-app.use('/api/vendors', itemsRouter);
+app.use('/api', itemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
