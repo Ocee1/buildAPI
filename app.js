@@ -6,8 +6,9 @@ var logger = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
 const mysql = require('mysql2');
+const auth = require('./auth');
 
-const DB = require('./models/config');
+const DB = require('./services/config');
 
 require('dotenv').config()
 
@@ -36,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/db', dbrouter);
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 app.use('/api', itemsRouter);
 
 // catch 404 and forward to error handler

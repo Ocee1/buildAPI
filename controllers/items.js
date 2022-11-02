@@ -1,22 +1,22 @@
-const DB = require('../models/config');
+const DB = require('../services/config');
 
-const createvendor = async (req, res) => {
-    const data = req.body;
-    try {
-        const result = await DB.query(`INSERT INTO vendors(name) VALUES(${data.name})`);
+// const createvendor = async (req, res) => {
+//     const data = req.body;
+//     try {
+//         const result = await DB.query(`INSERT INTO vendors(name) VALUES(${data.name})`);
 
-        let message = 'Error in creating Vendor!';
-        if(result.affectedRows) {
-            console.log(result);
-            message = 'Created successfully';
-        };
+//         let message = 'Error in creating Vendor!';
+//         if(result.affectedRows) {
+//             console.log(result);
+//             message = 'Created successfully';
+//         };
 
-        res.json({message});
+//         res.json({message});
 
-    } catch (error) {
-        res.status(500).json({ msg: error });
-    }
-};
+//     } catch (error) {
+//         res.status(500).json({ msg: error });
+//     }
+// };
 
 const createitems = async (req, res) => {
     const data = {
@@ -98,7 +98,6 @@ const getVendorItems = async (req, res) => {
 
 
 module.exports = {
-    createvendor,
     createitems,
     getAllItems,
     getVendorItems

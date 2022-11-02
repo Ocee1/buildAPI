@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const DB = require('../models/config');
+const DB = require('../services/config');
 
 /* GET home page. */
 

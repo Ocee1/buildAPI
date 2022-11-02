@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.3",
@@ -15,8 +16,13 @@
     "hbs": "^4.2.0",
     "helmet": "^6.0.0",
     "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.5",
     "morgan": "~1.9.0",
+    "mysql": "^2.18.1",
     "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

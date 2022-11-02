@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const DB = mysql.createConnection({
-    host: process.env.DBHOST,
-    user: process.env.DBUSER,
-    password: process.env.PSW,
-    database: process.env.DBNAME
+    host: 'localhost',
+    user: 'root',
+    password: '123456789',
+    database: 'vendorsdb'
   
   });
 

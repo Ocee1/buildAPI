@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const DB = require('../models/config');
+const DB = require('../services/config');
+const mysql = require('mysql2');
 
 router.route('/')
 .get((req, res, next) => {
@@ -21,10 +22,10 @@ router.route('/create')
     }
 });
 
-router.route('/vendortable')
+router.route('/usertable')
 .get((req, res, next) => {
     try {
-        let sql = 'CREATE TABLE vendors(id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100)';
+        let sql = 'CREATE TABLE users(user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100), email VARCHAR(100), password VARCHAR(100))';
         DB.query(sql, (err, result) => {
             if (err) throw err;
             console.log(result);
@@ -37,7 +38,7 @@ router.route('/vendortable')
   
 router.route('/itemsTable')
 .get((req, res, next) => {
-    let sql = 'CREATE TABLE items(itemId INT NOT NULL AUTO_INCREMENT, name VARCHAR(255), price INT, vendorId INT, PRIMARY KEY(itemId), FOREIGN KEY(vendorId) REFERENCES vendors(id)';
+    let sql = 'CREATE TABLE items(item_Id INT NOT NULL AUTO_INCREMENT, item_name VARCHAR(255), price INT, vendor_Id INT, PRIMARY KEY(item_Id), FOREIGN KEY(user_Id) REFERENCES users(user_Id)';
     try {
         DB.query(sql, (err, result) => {
             if (err) throw err;
