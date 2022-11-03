@@ -1,16 +1,18 @@
+const express = require('express');
 const mysql = require('mysql2');
 
 const DB = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456789',
-    database: 'vendorsdb'
+  host: process.env.DBHOST,
+  user: process.env.DBUSER,
+  password: process.env.PSW,
+  database: process.env.DBNAME
   
-  });
+});
+
 
 DB.connect ((err) => {
-    if (err) throw err;
-    console.log('mysql connected...');
+  if (err) throw err;
+  console.log('mysql connected...');
 });
 
 

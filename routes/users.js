@@ -26,7 +26,7 @@ router.route('/register')
     if(results.length > 0) {
       res.json({msg: "email already in use"});
     }
-
+    
       
     let hashedPassword = await bcrypt.hash(password, 8);
     const sql = `INSERT INTO users(name, email, password) VALUES ('${name}', '${email}', '${hashedPassword}')`;

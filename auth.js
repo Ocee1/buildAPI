@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const DB = require('./services/config');
- 
+
 const auth = async (req, res, next) => {
     try{
         const idToken = req.header('Authorization').replace('Bearer ','');

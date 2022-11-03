@@ -3,7 +3,6 @@ const { createitems, getAllItems, getVendorItems} = require('../controllers/item
 const bodyParser = require('body-parser');
 const auth = require('../auth')
 
-
 // const Item = require('./controllers/User')
 
 var itemRouter = express.Router();
