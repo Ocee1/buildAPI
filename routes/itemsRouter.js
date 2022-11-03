@@ -16,7 +16,7 @@ itemRouter.route('/create-items')
 itemRouter.route('/allItems')
 .get(getAllItems);
 
-itemRouter.route('/vendor')
+itemRouter.route('/vendor/:id')
 .get(getVendorItems);
 // .delete(deleteItems)
 

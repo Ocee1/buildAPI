@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const compression = require('compression');
 const helmet = require('helmet');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const auth = require('./auth');
 
 const DB = require('./services/config');

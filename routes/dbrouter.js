@@ -38,7 +38,7 @@ router.route('/usertable')
   
 router.route('/itemsTable')
 .get((req, res, next) => {
-    let sql = 'CREATE TABLE items(item_Id INT NOT NULL AUTO_INCREMENT, item_name VARCHAR(255), price INT, vendor_Id INT, PRIMARY KEY(item_Id), FOREIGN KEY(user_Id) REFERENCES users(user_Id)';
+    let sql = 'CREATE TABLE items (item_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, item_name VARCHAR(255), price INT, user_Id INT, FOREIGN KEY(user_Id) REFERENCES users(user_Id))';
     try {
         DB.query(sql, (err, result) => {
             if (err) throw err;

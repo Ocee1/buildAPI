@@ -52,7 +52,7 @@ router.route('/login')
       return res.status(400).json({ msg: 'Email or password must not be empty'});
     }
 
-    DB.query("SELECT * FROM users WHERE email=?", email, (err,result)=>{
+    DB.query("SELECT * FROM users WHERE email=?", email, (err, result)=>{
 
       if(err){
         return res.status(400).json({
@@ -80,7 +80,7 @@ router.route('/login')
         const token = jwt.sign({ id: result[0].user_id.toString() }, process.env.SECRET_KEY)   
           return res.status(200).json({
           msg:"logged in successfully",
-          // user:result[0],
+          user: result[0],
           token
         });
       });

@@ -18,34 +18,43 @@ const DB = require('../services/config');
 //     }
 // };
 
-const createitems = async (req, res) => {
+const createitems = (req, res) => {
     const data = {
-        name: req.body.name,
+        item_name: req.body.name,
         price: req.body.price,
-        vendorId: req.body.vendorId
+        user_Id: req.body.user_Id
     };
     try {
-        const result = await DB.query(`INSERT INTO items(name, price, vendorId) VALUES(${data.name}, ${data.price}, ${data.vendorId})`);
-
-        let message = 'Error in creating Vendor!';
-        if(result.affectedRows) {
-            console.log(result);
-            message = 'Created successfully';
-        };
-
-        res.json({message}, {result});
+        DB.query(`INSERT INTO items (item_name, price, user_Id) VALUES ('${data.item_name}', '${data.price}', '${data.user_Id}')`, (err, result) => {
+            if(err) throw err;
+            let message = 'Error in creating Vendor!';
+            console.log('successful')
+            // if(result.affectedRows) {
+            //     console.log(result);
+            //     message = 'Created successfully';
+            // };
+            res.json({result});
+        });
+                
+        
         
     } catch (error) {
+        console.log(error)
         res.status(500).json({ msg: error });
     };
 };
+
 const getAllItems = async (req, res) => {
     
     try {
-        const items = await DB.query(`SELECT * FROM items`)
+        DB.query(`SELECT * FROM items`, (err, results) => {
+            if(err) throw err;
+            
+            res.json({results});
+        })
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json({items});
+        
     }
     catch (error) {
         res.status(500).json({msg: error})
@@ -54,10 +63,13 @@ const getAllItems = async (req, res) => {
 
 const getVendorItems = async (req, res) => {
     try {
-        const item = DB.query(`SELECT * FROM items WHERE vendorId = ${req.params.id}`);
+        DB.query(`SELECT * FROM items WHERE user_Id = '${req.params.id}'`, (err, results) => {
+            if(err) throw err;
+            res.json({results});
+        });
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json({items});
+        
     } catch (error) {
         res.status(500).json({msg: error});
     }
